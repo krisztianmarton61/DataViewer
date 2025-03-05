@@ -3,7 +3,7 @@
 ## Overview
 DataViewer is a simple web application designed to display Albums and Posts in an intuitive and user-friendly manner. The application features a Home page with navigation icons for accessing Albums and Posts.
 
-## Features
+## Features to be added
 - **Home Page**
   - Displays two icons: one for **Albums** and one for **Posts** (see `Home.jpg`).
   - Allows easy navigation to respective sections.
@@ -31,7 +31,7 @@ The application architecture is illustrated in `Architecture.png`.
 1. Clone the repository.
 2. Install dependencies.
 3. Run the application.
-4. Navigate through the Home, Albums, and Posts pages as described above.
+5. Add the Home, Albums, and Posts pages as described above.
 
-Enjoy exploring data with DataViewer!
+Enjoy developing the DataViewer!
 
