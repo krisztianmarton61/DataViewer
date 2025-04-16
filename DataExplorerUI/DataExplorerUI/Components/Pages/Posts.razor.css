@@ -1,0 +1,37 @@
+﻿.page-content-container {
+    padding: 40px;
+    width: auto;
+}
+
+.posts-container {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.post-container {
+    margin-bottom: 15px;
+}
+
+.post-header {
+    display: flex;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.post-title {
+    font-size: 18px;
+    color: #333;
+}
+
+.icon {
+    font-size: 18px;
+    padding-left: 10px;
+}
+
+.post-body {
+    margin-top: 10px;
+    color: #444;
+    display: block;
+    font-size: 16px;
+}

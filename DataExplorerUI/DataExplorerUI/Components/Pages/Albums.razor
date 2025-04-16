@@ -1,0 +1,64 @@
+﻿@page "/albums"
+@rendermode InteractiveServer
+@using DataExplorerModels;
+@using System.Linq
+
+<div class="page-content-container">
+    <h3>Albums Page</h3>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Album Title</th>
+                <th>Created By</th>
+                <th>From Company</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (albums != null)
+            {
+                @foreach (var album in albums)
+                {
+                    <tr>
+                        <td>@album.Title</td>
+                        <td>@album.User.Username</td>
+                        <td>@album.User.Company.Name</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr><td colspan="4">Loading...</td></tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@code {
+    private List<Album> albums;
+    private HttpClient httpClient = new HttpClient();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var response = await httpClient.GetAsync("http://localhost:5192/api/albums");
+
+        if (response.IsSuccessStatusCode)
+        {
+            var json = await response.Content.ReadAsStringAsync();
+            if (!string.IsNullOrWhiteSpace(json)) 
+            {
+                albums = await response.Content.ReadFromJsonAsync<List<Album>>();
+            }
+            else
+            {
+                albums = new List<Album>(); 
+            }
+        }
+        else
+        {
+            Console.WriteLine($"Error: {response.StatusCode}");
+            albums = new List<Album>(); 
+        }
+    }
+
+}

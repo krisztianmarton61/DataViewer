@@ -1,0 +1,75 @@
+﻿@page "/posts"
+@inject HttpClient Http
+@inject IJSRuntime JS
+@using DataExplorerModels
+@rendermode InteractiveServer
+
+
+<div class="page-content-container">
+    <h2>Posts</h2>
+
+    <div class="posts-container">
+
+        @foreach (var post in posts)
+        {
+            <div class="post-container">
+                <div class="post-header" @onclick="() => TogglePostVisibility(post)">
+                    <span class="post-title">@post.Title</span>
+                    <span class="icon">
+                        @if (isExpanded.Contains(post.Id))
+                        {
+                            <span>&#9650;</span>
+                        }
+                        else
+                        {
+                            <span>&#9660;</span>
+                        }
+                    </span>
+                </div>
+
+                @if (isExpanded.Contains(post.Id))
+                {
+                    <div class="post-body">
+                        <p>@post.Body</p>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    public List<Post> posts = new();
+    private HashSet<string> isExpanded = new(); 
+
+    private void TogglePostVisibility(Post post)
+    {
+        if (isExpanded.Contains(post.Id))
+        {
+            isExpanded.Remove(post.Id); 
+        }
+        else
+        {
+            isExpanded.Add(post.Id);
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetPosts();
+    }
+
+    private async Task GetPosts()
+    {
+        var response = await Http.GetAsync("http://localhost:5192/api/posts");
+
+        if (response.IsSuccessStatusCode)
+        {
+            posts = await response.Content.ReadFromJsonAsync<List<Post>>();
+        }
+        else
+        {
+            Console.WriteLine("Failed to load data");
+        }
+    }
+}

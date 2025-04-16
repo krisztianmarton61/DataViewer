@@ -1,7 +1,28 @@
 ﻿@page "/"
+@inject NavigationManager Navigation
 
-<PageTitle>Home</PageTitle>
+<PageTitle>DataViewer | Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<div class="container">
+    <div class="icon-container" @onclick="NavigateToAlbums">
+        <span class="e-icons e-folder big-pointer-icon"></span>
+        <h4>Albums</h4>
+    </div>
 
-Welcome to your new app.
+    <div class="icon-container" @onclick="NavigateToPosts">
+        <span class="e-icons e-folder big-pointer-icon"></span>
+        <h4>Posts</h4>
+    </div>
+</div>
+
+@code {
+    private void NavigateToPosts()
+    {
+        Navigation.NavigateTo("/posts");
+    }
+
+    private void NavigateToAlbums()
+    {
+        Navigation.NavigateTo("/albums");
+    }
+}

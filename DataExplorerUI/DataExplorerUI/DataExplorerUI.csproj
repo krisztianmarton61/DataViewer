@@ -6,4 +6,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+	<ItemGroup>
+		<ProjectReference Include="..\DataExplorerModels\DataExplorerModels.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Syncfusion.Blazor" Version="29.1.38" />
+	</ItemGroup>
+	
 </Project>

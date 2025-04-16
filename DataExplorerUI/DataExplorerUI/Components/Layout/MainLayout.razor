@@ -1,16 +1,16 @@
 ﻿@inherits LayoutComponentBase
+@inject NavigationManager Navigation
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+    <header class="header">
+        <div class="header-content">
+            <div class="icon-container" @onclick="NavigateHome">
+                <span class="e-icons e-home big-red-home"></span>             
+            </div>
         </div>
-
-        <article class="content px-4">
+    </header>
+    <main>
+        <article>
             @Body
         </article>
     </main>
@@ -21,3 +21,10 @@
     <a href="." class="reload">Reload</a>
     <span class="dismiss">🗙</span>
 </div>
+
+@code {
+    private void NavigateHome()
+    {
+        Navigation.NavigateTo("/");
+    }
+}

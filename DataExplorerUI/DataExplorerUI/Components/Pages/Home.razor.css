@@ -1,0 +1,33 @@
+﻿.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px; /* Spacing between items */
+    margin-top: 50px; /* Top margin to space it from the page */
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.icon {
+    margin-bottom: 10px;
+}
+
+h4 {
+    font-size: 18px;
+    color: #333;
+    font-weight: bold;
+}
+
+.fas {
+    color: #4CAF50; /* Folder icon color */
+}
+
+.big-pointer-icon {
+    font-size:50px;
+    cursor: pointer;
+}

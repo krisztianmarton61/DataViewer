@@ -1,10 +1,15 @@
 using DataExplorerUI.Components;
+using Syncfusion.Blazor;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://api.example.com/") });
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddSyncfusionBlazor();
 
 var app = builder.Build();
 
