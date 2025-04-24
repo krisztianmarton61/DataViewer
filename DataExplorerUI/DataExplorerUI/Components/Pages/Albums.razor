@@ -1,7 +1,7 @@
 ﻿@page "/albums"
 @rendermode InteractiveServer
-@using DataExplorerModels;
-@using System.Linq
+@using DataExplorerModels
+@inject AlbumService AlbumService
 
 <div class="page-content-container">
     <h3>Albums Page</h3>
@@ -35,30 +35,24 @@
 </div>
 
 @code {
-    private List<Album> albums;
-    private HttpClient httpClient = new HttpClient();
+    private List<Album> albums = new();
 
     protected override async Task OnInitializedAsync()
     {
-        var response = await httpClient.GetAsync("http://localhost:5192/api/albums");
 
-        if (response.IsSuccessStatusCode)
-        {
-            var json = await response.Content.ReadAsStringAsync();
-            if (!string.IsNullOrWhiteSpace(json)) 
-            {
-                albums = await response.Content.ReadFromJsonAsync<List<Album>>();
-            }
-            else
-            {
-                albums = new List<Album>(); 
-            }
-        }
-        else
-        {
-            Console.WriteLine($"Error: {response.StatusCode}");
-            albums = new List<Album>(); 
-        }
+        await GetAlbums();
     }
 
+    private async Task GetAlbums()
+    {
+        try
+        {
+            albums = await AlbumService.GetAlbumsAsync();
+        }
+        catch (HttpRequestException ex)
+        {
+            Console.WriteLine("Error: " + ex.Message);
+            albums = new List<Album>();
+        }
+    }
 }

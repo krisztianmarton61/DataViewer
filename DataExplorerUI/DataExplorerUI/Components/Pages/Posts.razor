@@ -3,7 +3,7 @@
 @inject IJSRuntime JS
 @using DataExplorerModels
 @rendermode InteractiveServer
-
+@inject PostsService PostsService
 
 <div class="page-content-container">
     <h2>Posts</h2>
@@ -40,13 +40,13 @@
 
 @code {
     public List<Post> posts = new();
-    private HashSet<string> isExpanded = new(); 
+    private HashSet<string> isExpanded = new();
 
     private void TogglePostVisibility(Post post)
     {
         if (isExpanded.Contains(post.Id))
         {
-            isExpanded.Remove(post.Id); 
+            isExpanded.Remove(post.Id);
         }
         else
         {
@@ -61,13 +61,11 @@
 
     private async Task GetPosts()
     {
-        var response = await Http.GetAsync("http://localhost:5192/api/posts");
-
-        if (response.IsSuccessStatusCode)
+        try
         {
-            posts = await response.Content.ReadFromJsonAsync<List<Post>>();
-        }
-        else
+            posts = await PostsService.GetPostsAsync();
+        } 
+        catch
         {
             Console.WriteLine("Failed to load data");
         }
