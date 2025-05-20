@@ -1,0 +1,16 @@
+# Use Playwright image as base
+FROM mcr.microsoft.com/playwright/dotnet:v1.52.0-noble AS base
+
+# Install .NET 9 SDK
+RUN curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --install-dir /usr/share/dotnet --channel 9.0
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the project files into the container
+COPY . .
+
+# Build the project
+RUN dotnet build
+
+CMD ["dotnet", "test", "--no-build"]
