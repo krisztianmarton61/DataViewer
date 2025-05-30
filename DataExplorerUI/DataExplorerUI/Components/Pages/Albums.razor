@@ -1,7 +1,7 @@
 ﻿@page "/albums"
 @rendermode InteractiveServer
 @using DataExplorerModels
-@inject AlbumService AlbumService
+@inject AlbumsService AlbumsService
 
 <div class="page-content-container">
     <h3>Albums Page</h3>
@@ -47,7 +47,7 @@
     {
         try
         {
-            albums = await AlbumService.GetAlbumsAsync();
+            albums = await AlbumsService.GetAlbumsAsync();
         }
         catch (HttpRequestException ex)
         {

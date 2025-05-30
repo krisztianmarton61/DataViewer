@@ -4,11 +4,11 @@ using Microsoft.Extensions.Options;
 
 namespace DataExplorerUI.Services
 {
-    public class AlbumService
+    public class AlbumsService
     {
         private readonly HttpClient _httpClient;
         private readonly string _baseUrl;
-        public AlbumService(HttpClient httpClient, IOptions<ApiOptions> options)
+        public AlbumsService(HttpClient httpClient, IOptions<ApiOptions> options)
         {
             _httpClient = httpClient;
             _baseUrl = options.Value.BaseUrl;

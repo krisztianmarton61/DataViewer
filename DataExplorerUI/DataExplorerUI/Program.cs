@@ -6,7 +6,7 @@ using Syncfusion.Blazor;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://api.example.com/") });
-builder.Services.AddScoped<AlbumService>();
+builder.Services.AddScoped<AlbumsService>();
 builder.Services.AddScoped<PostsService>();
 builder.Services.Configure<ApiOptions>(builder.Configuration.GetSection(ApiOptions.SectionName));
 
